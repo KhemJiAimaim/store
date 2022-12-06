@@ -1,0 +1,84 @@
+{% extends "layouts/base.html" %}
+{% load humanize %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'CSS/myfirst.css' %}">
+{% endblock %}
+{% block script %}
+    <script src="{% static 'JS/myfirst.js' %}"></script>
+    {% endblock %}
+{% block title %} Phacharamon Shop {% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-2 ">
+        <div class="list-group mx-2 mt-1">
+            <a href=" {% url 'index' %} "
+                class="list-group-item list-group-item-action {% if not categ_id %}active{% endif %}">
+                สินค้าทั้งหมด
+            </a>
+            {% for c in category %}
+            <a href=" {% url 'index' %}?categorysid={{ c.id }}"
+                class="list-group-item list-group-item-action {% if categ_id|add:'0' == c.id %}active{% endif %}">
+                {{c.name}}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="col-lg-8 mt-3">
+        <h2>All Product</h2>
+
+        <div class="row">
+            {% for x in product %}
+            <div class="col-lg-2 mt-5" >
+                <div class="card mb-4" >
+                    {% if x.image %}
+                    <a href="#">
+                        <img src="{{ x.image.url }}" alt="image" class="card-img-top" height="180px">
+                    </a>
+                    {% else %}
+                    <a href="#">
+                        <img src="{% static 'media/no-pic.jpg' %}" alt="image" class="card-img-top" height="180px">
+                    </a>
+                    {% endif %}
+                    <div class="card-body" height= "100px">
+                        <h5><a href="#">{{ x.name}}</a></h5>
+                        <!-- <h6><a href="#">{{ x.category.name}}</a></h6> -->
+                        <a href="delete/{{ x.id}}"> ลบ </a>
+                        <a href="update/{{ x.id }}"> แก้ไข </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+
+        <br>
+        <ul class="pagination">
+            {% if product.has_previous %}
+            <li class="page-item"><a class="page-link"
+                    href="?page=product.previous_page_number">Previous</a></li>
+            {% endif %}
+
+            {% for i in product.paginator.page_range %}
+            <li class="page-item {% if product.number == i %}active{% endif %}"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+            {% endfor %}
+
+            {% if product.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{product.next_page_number}}">Next</a></li>
+            {% endif %}
+        </ul>
+    </div>
+
+
+    <div class="col-lg-2">
+        <div class="row">
+            <a class="btn btn-success " href="add/"> Add Product </a>
+        </div>
+        <h2>hello</h2>
+    </div>
+
+
+</div>
+{% endblock %}
