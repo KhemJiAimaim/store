@@ -10,7 +10,6 @@ from django.urls import reverse
 # Create your views here.
 
 
-
 def index(request):
     category = Category.objects.all()
     product = Products.objects.filter()
@@ -51,7 +50,6 @@ def product_add(request):
     return render(request, 'store/add.html' , {
         'form' : form , 
     })
-
 
 def delete(request, id):
     product = Products.objects.get(id = id)

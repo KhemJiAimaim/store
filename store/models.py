@@ -37,7 +37,7 @@ class Products (models.Model):
     barcode = models.CharField(max_length=250 , unique=True)
 
     class Meta:
-        ordering = ['quantity'] #เรียงจากน้อยไปมาก ถ้า -quantity จะเป็นจากมากไปน้อย
+        ordering = ['id'] #เรียงจากน้อยไปมาก ถ้า -quantity จะเป็นจากมากไปน้อย
         verbose_name_plural = 'Products'
     
     def __str__(self) :

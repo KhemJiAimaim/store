@@ -18,7 +18,7 @@
                 สินค้าทั้งหมด
             </a>
             {% for c in category %}
-            <a href=" {% url 'index' %}?categorysid={{ c.id }}"
+            <a href=" {% url 'index' %}?categ_id={{ c.id }}"
                 class="list-group-item list-group-item-action {% if categ_id|add:'0' == c.id %}active{% endif %}">
                 {{c.name}}
             </a>
@@ -43,10 +43,11 @@
                     </a>
                     {% endif %}
                     <div class="card-body" height= "100px">
-                        <h5><a href="#">{{ x.name}}</a></h5>
-                        <!-- <h6><a href="#">{{ x.category.name}}</a></h6> -->
-                        <a href="delete/{{ x.id}}"> ลบ </a>
-                        <a href="update/{{ x.id }}"> แก้ไข </a>
+                        <div><h5>{{ x.name}}</h5></div>
+                        <a href="#" class="btn btn-info " >เลือก</a>
+                         <!--<h6><a href="#">{{ x.category.name}}</a></h6>
+                        <a href="delete/{{ x.id}}"> ลบ </a> 
+                        <a href="update/{{ x.id }}"> แก้ไข </a>-->
                     </div>
                 </div>
             </div>
